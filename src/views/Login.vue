@@ -19,25 +19,25 @@
                         <div class="text-center text-muted mb-4">
                             <small>Or sign in with credentials</small>
                         </div>
-                        <form role="form">
+                        <form role="form" v-on:submit.prevent>
                             <base-input class="input-group-alternative mb-3"
                                         placeholder="Email"
                                         addon-left-icon="ni ni-email-83"
-                                        v-model="model.email">
+                                        v-model="auth.user_mail">
                             </base-input>
 
                             <base-input class="input-group-alternative"
                                         placeholder="Password"
                                         type="password"
                                         addon-left-icon="ni ni-lock-circle-open"
-                                        v-model="model.password">
+                                        v-model="auth.user_password">
                             </base-input>
 
                             <base-checkbox class="custom-control-alternative">
                                 <span class="text-muted">Remember me</span>
                             </base-checkbox>
                             <div class="text-center">
-                                <base-button type="primary" class="my-4">Sign in</base-button>
+                                <base-button type="submit" @click="login" class="my-4">Sign in</base-button>
                             </div>
                         </form>
                     </div>
@@ -54,17 +54,81 @@
         </div>
 </template>
 <script>
-  export default {
-    name: 'login',
-    data() {
-      return {
-        model: {
-          email: '',
-          password: ''
-        }
+//   export default {
+//     name: 'login',
+//     data() {
+//       return {
+//         model: {
+//           email: '',
+//           password: ''
+//         }
+//       }
+//     }
+//   }
+
+import axios from "axios";
+
+export default {
+  name: "Login",
+  components: {
+
+  },
+  data() {
+    return {
+      // user: [],
+      auth: {},
+    };
+  },
+  methods: {
+    // setUser(data) {
+    //   this.user = data;
+    // },
+    login() {
+      if (this.auth.user_mail && this.auth.user_password) {
+        axios
+          .post("http://localhost/be_myhotel/api/login", this.auth)
+          .then((response) => {
+            if (response.data != null){
+              console.log(response.data.data);
+              this.$cookie.set('user_id', response.data.data.user_id, { expires: '30m' });
+              this.$cookie.set('user_nama', response.data.data.user_nama, { expires: '30m' });
+
+              // this.setUser(response.data)
+            this.$toast.success("Berhasil Login", {
+              type: "success",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+            this.$router.push({ path: "/"})
+            } else {
+              this.$toast.error("Email dan Password tidak ditemukan", {
+                type: "error",
+                position: "top-right",
+                duration: 3000,
+                dismissible: true,
+              });
+            }
+            
+          })
+          .catch((err) => console.log(err));
+      } else {
+        this.$toast.error("Email dan Password Harus diisi", {
+          type: "error",
+          position: "top-right",
+          duration: 3000,
+          dismissible: true,
+        });
       }
-    }
-  }
+    },
+  },
+  // mounted() {
+  //   axios
+  //     .get("http://localhost:8000/movie")
+  //     .then((response) => this.setUser(response.data))
+  //     .catch((error) => console.log(error));
+  // }
+};
 </script>
 <style>
 </style>

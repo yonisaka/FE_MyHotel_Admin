@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
-// import AuthLayout from '@/layout/AuthLayout'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +25,12 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
     }
+
   ]
 })
