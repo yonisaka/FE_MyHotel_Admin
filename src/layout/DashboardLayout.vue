@@ -44,7 +44,8 @@
     },
     data() {
       return {
-        sidebarBackground: 'vue' //vue|blue|orange|green|red|primary
+        sidebarBackground: 'vue', //vue|blue|orange|green|red|primary
+        user: this.$cookie.get('user_id')
       };
     },
     methods: {

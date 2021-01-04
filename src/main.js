@@ -21,12 +21,17 @@ import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-default.css';
 
 Vue.config.productionTip = false
 
 Vue.use(ArgonDashboard)
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
+Vue.use(require('vue-cookie'));
+Vue.use(require('vue-moment'));
+Vue.use(VueToast);
 
 new Vue({
   router,

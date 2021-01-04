@@ -13,7 +13,7 @@
                 <base-dropdown class="nav-link pr-0">
                     <div class="media align-items-center" slot="title">
                         <div class="media-body ml-2 d-none d-lg-block">
-                            <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+                            <span class="mb-0 text-sm  font-weight-bold">{{ user_nama }}</span>
                         </div>
                     </div>
 
@@ -26,10 +26,10 @@
                             <span>My profile</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <router-link to="/profile" class="dropdown-item">
+                        <div class="dropdown-item">
                             <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </router-link>
+                            <span @click="logout">Logout</span>
+                        </div>
                     </template>
                 </base-dropdown>
             </li>
@@ -42,8 +42,16 @@
       return {
         activeNotifications: false,
         showMenu: false,
-        searchQuery: ''
+        searchQuery: '',
+        user_nama: this.$cookie.get('user_nama')
       };
+    },
+
+    created(){
+      if (!this.$cookie.get('user_id')){
+          this.$router.push({ path: "/login"});
+          console.log('asd')
+        }
     },
     methods: {
       toggleSidebar() {
@@ -54,7 +62,19 @@
       },
       toggleMenu() {
         this.showMenu = !this.showMenu;
-      }
+      },
+      logout() {
+      this.$cookie.delete('user_id');
+      this.$cookie.delete('user_nama');
+      this.$toast.success("Berhasil Logout", {
+        type: "success",
+        position: "top-right",
+        duration: 3000,
+        dismissible: true,
+      });
+      window.location.href = '/login';
+      // this.$router.push({ path: "/", redirect: '/'})
+    }
     }
   };
 </script>
