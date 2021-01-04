@@ -23,6 +23,11 @@ export default new Router({
           path: '/objek',
           name: 'objek',
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
+        },
+        {
+          path: '/insert',
+          name: 'insert',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Insert.vue')
         }
       ]
     },
@@ -31,6 +36,8 @@ export default new Router({
       name: 'login',
       component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
     }
+
+    
 
   ]
 })
