@@ -15,6 +15,7 @@
         />
 
         <sidebar-item :link="{name: 'Objek', icon: 'ni ni-bullet-list-67 text-red', path: '/objek'}"/>
+        <sidebar-item :link="{name: 'Insert', icon: 'ni ni-folder-17 text-red', path: '/insert'}"/>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
