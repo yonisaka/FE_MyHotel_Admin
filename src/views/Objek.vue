@@ -1,6 +1,6 @@
 <template>
     <div>
-        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+        <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-5">
             
         </base-header>
 
@@ -15,53 +15,54 @@
                           List Objek
                         </h3>
                       </div>
-        
+                      <div class="col text-right">
+                        <router-link to="/add_objek">
+                          <base-button type="success" size="sm" ><b-icon-plus></b-icon-plus> Tambah Objek</base-button>
+                        </router-link>
+                      </div>
                     </div>
                   </div>
                     <div class="table-responsive">
-                      <base-table class="table align-items-center table-flush"
-                                  :thead-classes="'thead-light'"
-                                  tbody-classes="list"
-                                  :data="tableData">
-                        <template slot="columns">
-                          <th class="text-center">Room</th>
-                          <th class="text-center">Jenis</th>
-                          <th class="text-center">Harga</th>
-                          <th class="text-center">Status</th>
-                          <th class="text-center"></th>
-                        </template>
-
-                        <template slot-scope="{row}">
-                          <th scope="row">
-                            <div class="media align-items-center">
-                              <a href="#" class="avatar rounded-circle mr-3">
-                                <img alt="Image placeholder" :src="row.img">
-                              </a>
-                              <div class="media-body">
-                                <span class="name mb-0 text-sm">{{row.title}}</span>
-                              </div>
-                            </div>
-                          </th>
-                          <td class="text-center"> Jenis </td>
-                          <td class="budget text-center">
-                            {{row.budget}}
-                          </td>
-                          <td class="text-center">
-                            <badge class="badge-dot mr-4" :type="row.statusType">
-                              <i :class="`bg-${row.statusType}`"></i>
-                              <span class="status">{{row.status}}</span>
-                            </badge>
-                          </td>
-                          <td class="text-center">
-                            <button class="btn btn-sm btn-primary"> 
-                              <b-icon-pencil @click="edit(row.objek_id)"></b-icon-pencil>
-                            </button>
-                            <button class="btn btn-sm btn-danger"> 
-                              <b-icon-trash @click="hapus(row.objek_id)"></b-icon-trash>
-                            </button>
-                          </td>
-                        </template>
-                      </base-table>
+                      <table class="table align-items-center table-flush">
+                        <thead clas="thead-light">
+                          <tr>
+                            <th class="text-center">#</th>
+                            <th class="text-center" colspan="2">Room</th>
+                            <th class="text-center">Jenis</th>
+                            <th class="text-center">Harga</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center"></th>
+                          </tr>
+                        </thead>
+                        <tbody class="list">
+                          <tr v-for="(row, index) in objeks" :key="row.objek_id">
+                            <th>{{index+1}}</th>
+                            <td>
+                              <img
+                                :src="row.objek_foto"
+                                class="img-fluid shadow mb-2"
+                                width="250"
+                              /> <br>
+                            </td>
+                            <td><strong>{{ row.objek_nama }}</strong><br>
+                                {{ row.objek_keterangan }}
+                            </td>
+                            <td class="text-center">{{ row.objek_jenis }}</td>
+                            <td align="right">Rp. {{ formatPrice(row.objek_harga) }} </td>
+                            <td align="right">
+                              <strong>{{ row.objek_status }}</strong>
+                            </td>
+                            <td class="text-center">
+                              <button class="btn btn-sm btn-primary"> 
+                                <b-icon-pencil @click="edit(row.objek_id)"></b-icon-pencil>
+                              </button>
+                              <button class="btn btn-sm btn-danger"> 
+                                <b-icon-trash @click="hapus(row.objek_id)"></b-icon-trash>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -71,58 +72,58 @@
     </div>
 </template>
 <script>
-  // import ProjectsTable from './Tables/ProjectsTable'
+  import axios from "axios";
+
   export default {
     name: 'objek',
     components: {
-      // ProjectsTable
+      
     },
     data() {
       return {
-        tableData: [
-          {
-            img: 'img/theme/bootstrap.jpg',
-            title: 'Argon Design System',
-            budget: '$2500 USD',
-            status: 'pending',
-            statusType: 'warning',
-            completion: 60
-          },
-          {
-            img: 'img/theme/angular.jpg',
-            title: 'Angular Now UI Kit PRO',
-            budget: '$1800 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100
-          },
-          {
-            img: 'img/theme/sketch.jpg',
-            title: 'Black Dashboard',
-            budget: '$3150 USD',
-            status: 'delayed',
-            statusType: 'danger',
-            completion: 72
-          },
-          {
-            img: 'img/theme/react.jpg',
-            title: 'React Material Dashboard',
-            budget: '$4400 USD',
-            status: 'on schedule',
-            statusType: 'info',
-            completion: 90
-          },
-          {
-            img: 'img/theme/vue.jpg',
-            title: 'Vue Paper UI Kit PRO',
-            budget: '$2200 USD',
-            status: 'completed',
-            statusType: 'success',
-            completion: 100
-          }
-        ]
+        objeks: [],
+        objek: {},
       }
-    }
+    },
+    methods: { 
+      formatPrice(value) {
+        let val = (value/1).toFixed(2).replace('.', ',')
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      },
+      setObjeks(data) {
+        this.objeks = data;
+      },
+      hapus(id) {
+        this.objek.objek_id = id;
+        axios
+          .post("http://localhost/be_myhotel/api/objekDelete", this.objek)
+          .then(() => {
+            this.$toast.error("Sukses Hapus Objek", {
+              type: "error",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+
+            // Update Data objek
+            axios
+            .get("http://localhost/be_myhotel/api/objek")
+            .then((response) => {
+              console.log(response.data.result)
+              this.setObjeks(response.data.result)})
+            .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      }
+    },
+    mounted() {
+      axios
+        .get("http://localhost/be_myhotel/api/objek")
+        .then((response) => {
+          console.log(response.data.result)
+          this.setObjeks(response.data.result)})
+        .catch((error) => console.log(error));
+    },
   };
 </script>
 <style></style>

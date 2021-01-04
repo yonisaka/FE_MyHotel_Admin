@@ -23,6 +23,11 @@ export default new Router({
           path: '/objek',
           name: 'objek',
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
+        },
+        {
+          path: '/add_objek',
+          name: 'add_objek',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Add_objek.vue')
         }
       ]
     },
