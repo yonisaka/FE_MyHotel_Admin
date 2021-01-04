@@ -3,3 +3,18 @@
 //
 
 @import "../core/dropdowns/dropdown";
+
+.dropdown-menu-hotel {
+    min-width: 12rem;
+
+    .dropdown-item {
+        padding: .5rem 1rem;
+        font-size: $font-size-sm;
+        > i,
+        > svg {
+            margin-right: 1rem;
+            font-size: 1rem;
+            vertical-align: -17%;
+        }
+    }
+}

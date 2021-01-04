@@ -16,7 +16,7 @@
                         </h3>
                       </div>
                       <div class="col text-right">
-                        <router-link to="/add_objek">
+                        <router-link to="/insert_objek">
                           <base-button type="success" size="sm" ><b-icon-plus></b-icon-plus> Tambah Objek</base-button>
                         </router-link>
                       </div>
@@ -95,8 +95,9 @@
       },
       hapus(id) {
         this.objek.objek_id = id;
+        console.log(this.objek);
         axios
-          .post("http://localhost/be_myhotel/api/objekDelete", this.objek)
+          .post("http://localhost/be_myhotel/admin/objekDelete", this.objek)
           .then(() => {
             this.$toast.error("Sukses Hapus Objek", {
               type: "error",

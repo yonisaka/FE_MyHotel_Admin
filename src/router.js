@@ -25,9 +25,14 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
         },
         {
-          path: '/add_objek',
-          name: 'add_objek',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Add_objek.vue')
+          path: '/insert',
+          name: 'insert',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Insert.vue')
+        },
+        {
+          path: '/insert_objek',
+          name: 'insert_objek',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Insert_objek.vue')
         }
       ]
     },
@@ -36,6 +41,8 @@ export default new Router({
       name: 'login',
       component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
     }
+
+    
 
   ]
 })
