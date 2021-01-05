@@ -10,10 +10,18 @@
                   <div class="card shadow dark">
                   <div class="card-header border-0 dark">
                     <div class="row align-items-center">
-                      <div class="col">
+                      <div class="col-md-6">
                         <h3 class="mb-0 dark">
                           List Objek
                         </h3>
+                      </div>
+                      <div class="col-md-4">
+                        <base-input placeholder="Cari Objek" 
+                        v-model="search"
+                        @keyup="searchObjek"
+                        class="mb-0" 
+                        addon-right-icon="ni ni-zoom-split-in"
+                        ></base-input>
                       </div>
                       <div class="col text-right">
                         <router-link to="/insert_objek">
@@ -86,6 +94,7 @@
       return {
         objeks: [],
         objek: {},
+        search: '',
       }
     },
     methods: { 
@@ -95,6 +104,12 @@
       },
       setObjeks(data) {
         this.objeks = data;
+      },
+      searchObjek() {
+        axios
+        .get("http://localhost/be_myhotel/api/objek?objek_nama="+this.search)
+        .then((response) => this.setObjeks(response.data.result))
+        .catch((error) => console.log(error));
       },
       hapus(id) {
         this.objek.objek_id = id;
