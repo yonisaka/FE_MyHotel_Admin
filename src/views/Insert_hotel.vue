@@ -34,11 +34,13 @@
                                                                 >
                                                     </base-input>
 
-                                                    <div class="input-group-alternative mb-4">
+                                                    <base-input class="input-group-alternative"
+                                                                addon-left-icon="ni ni-pin-3"
+                                                                >
                                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
                                                                                     placeholder="Alamat"
                                                                                     v-model="model.hotel_alamat"></textarea>
-                                                    </div>
+                                                    </base-input>
 
                                                     <!-- <div class="input-group mb-3">
                                                         <label class="input-group-text" for="inputGroupFile01">Upload Foto</label>
