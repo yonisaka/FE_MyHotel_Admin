@@ -14,6 +14,7 @@
           }"
         />
 
+        <sidebar-item :link="{name: 'Transaksi', icon: 'ni ni-bullet-list-67 text-red', path: '/transaksi'}"/>
         <sidebar-item :link="{name: 'Objek', icon: 'ni ni-bullet-list-67 text-red', path: '/objek'}"/>
         <sidebar-item :link="{name: 'Hotel', icon: 'ni ni-building text-red', path: '/hotel'}"/>
       </template>

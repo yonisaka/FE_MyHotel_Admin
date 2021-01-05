@@ -20,6 +20,11 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
         },
         {
+          path: '/transaksi',
+          name: 'transaksi',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Transaksi.vue')
+        },
+        {
           path: '/objek',
           name: 'objek',
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
