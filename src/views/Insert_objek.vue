@@ -34,34 +34,46 @@
                                                                 >
                                                     </base-input>
 
-                                                    <div class="form-group input-group-alternative"
-                                                                addon-left-icon="ni ni-building">
-                                                        <select class="form-control" v-model="model.hotel_id">
-                                                        <option class="dropdown-item">1</option>
-                                                        <option class="dropdown-item">2</option>
-                                                        <option class="dropdown-item">3</option>
-                                                        <option class="dropdown-item">4</option>
-                                                        <option class="dropdown-item">5</option>
+                                                    <base-input class="input-group-alternative mb-3"
+                                                                addon-left-icon="ni ni-building"
+                                                                >
+                                                                <select class="form-control" v-model="model.hotel_id">
+                                                                    <option :selected="model.hotel_id">Pilih Hotel</option>
+                                                        <option class="dropdown-item"
+                                                        v-for="(row) in hotels" :key="row.hotel_id"
+                                                        :value="row.hotel_id">{{row.hotel_nama}}</option>
+                                                        
                                                         </select>
-                                                    </div>
+                                                    </base-input>
 
-                                                    <div class="input-group-alternative mb-4">
+                                                    <base-input class="input-group-alternative"
+                                                                addon-left-icon="ni ni-paper-diploma"
+                                                                >
                                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
                                                                                     placeholder="Keterangan"
                                                                                     v-model="model.objek_keterangan"></textarea>
-                                                    </div>
-
+                                                    </base-input>
                                                     <base-input class="input-group-alternative"
                                                                 placeholder="Harga"
                                                                 addon-left-icon="ni ni-money-coins"
                                                                 v-model="model.objek_harga"
                                                                 >
                                                     </base-input>
-
-                                                    <div class="input-group mb-3">
+                                                    <base-input class="input-group-alternative"
+                                                                placeholder="Jenis"
+                                                                addon-left-icon="ni ni-tag"
+                                                                v-model="model.objek_jenis"
+                                                                >
+                                                    </base-input>
+                                                    <base-input class="input-group-alternative"
+                                                                addon-left-icon="ni ni-camera-compact"
+                                                                >
+                                                                <input type="file" class="form-control" id="inputGroupFile01" ref="file" v-on:change="handleFileUpload()" >
+                                                    </base-input>
+                                                    <!-- <div class="input-group mb-3">
                                                         <label class="input-group-text" for="inputGroupFile01">Upload Foto</label>
                                                         <input type="file" class="form-control" id="inputGroupFile01" ref="file" v-on:change="handleFileUpload()" >
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="text-left">
                                                         <base-button aria-label="kamar" type="submit" @click="addObjek" class="my-4">Add Room</base-button>
@@ -89,10 +101,11 @@ import axios from "axios";
     data() {
       return {
         model:{
-            objek_jenis : "hotel"
+            
         },
         hotels: [],        
         file: '',
+        selected:"Pilih Hotel"
       };
     },
     methods: {
@@ -143,7 +156,9 @@ import axios from "axios";
     mounted() {
         axios
         .get("http://localhost/be_myhotel/admin/hotel")
-        .then((response) => this.setHotels(response.data.result))
+        .then((response) => {
+        console.log(response.data.result)
+        this.setHotels(response.data.result)})
         .catch((error) => console.log(error));
     }
   };
