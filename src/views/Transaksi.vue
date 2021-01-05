@@ -15,6 +15,14 @@
                           List Transaksi
                         </h3>
                       </div>
+                      <div class="col-md-4 text-right">
+                        <base-input placeholder="Cari Nama Transaksi" 
+                        v-model="search"
+                        @keyup="searchTransaksi"
+                        class="mb-0" 
+                        addon-right-icon="ni ni-zoom-split-in"
+                        ></base-input>
+                      </div>
                     </div>
                   </div>
                     <div class="table-responsive">
@@ -23,6 +31,8 @@
                           <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Transaksi Nomor</th>
+                            <th class="text-center">Pemesan</th>
+                            <th class="text-center">Room</th>
                             <th class="text-center">Tanggal</th>
                             <th class="text-center">Total Harga</th>
                             <th class="text-center">Status</th>
@@ -34,6 +44,12 @@
                             <th class="text-center">{{index+1}}</th>
                             <td class="text-center">
                                 <strong>{{ row.transaksi_no }}</strong>
+                            </td>
+                            <td class="text-center">
+                                {{ row.user_nama }}
+                            </td>
+                            <td class="text-center">
+                                {{ row.room }}
                             </td>
                             <td class="text-center">
                                 {{ row.transaksi_tanggal }}
@@ -81,6 +97,7 @@
       return {
         transaksi: [],
         trans: {},
+        search: '',
       }
     },
     methods: { 
@@ -90,6 +107,12 @@
       },
       setTransaksi(data) {
         this.transaksi = data;
+      },
+      searchTransaksi() {
+        axios
+        .get("http://localhost/be_myhotel/api/transaksi?user_nama="+this.search)
+        .then((response) => this.setTransaksi(response.data.result))
+        .catch((error) => console.log(error));
       },
       cancel(id) {
       this.trans.transaksi_id = id;
