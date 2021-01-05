@@ -12,6 +12,9 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="mb-0 dark">
+                                            <router-link to="/objek">
+                          <base-button type="success" icon="ni ni-bold-left" size="sm" ></base-button>
+                          </router-link> 
                                             Masukan Data
                                         </h3>
                                     </div>
@@ -140,7 +143,7 @@ import axios from "axios";
                     duration: 3000,
                     dismissible: true,
                     });
-                    // this.$router.push({ path: "/"})
+                    this.$router.push({ path: "/objek"})
                 })
                 .catch((err) => console.log(err));
             } else {
