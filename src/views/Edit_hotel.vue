@@ -12,6 +12,9 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h3 class="mb-0 dark">
+                                            <router-link to="/hotel">
+                          <base-button type="success" icon="ni ni-bold-left" size="sm" ></base-button>
+                          </router-link> 
                                             Edit Data
                                         </h3>
                                     </div>

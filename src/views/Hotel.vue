@@ -90,9 +90,9 @@
         this.hotel.hotel_id = id;
         console.log(this.hotel);
         axios
-          .post("http://localhost/be_myhotel/admin/objekDelete", this.objek)
+          .post("http://localhost/be_myhotel/admin/hotelDelete", this.hotel)
           .then(() => {
-            this.$toast.error("Sukses Hapus Objek", {
+            this.$toast.error("Sukses Hapus Hotel", {
               type: "error",
               position: "top-right",
               duration: 3000,
@@ -101,10 +101,10 @@
 
             // Update Data objek
             axios
-            .get("http://localhost/be_myhotel/api/objek")
+            .get("http://localhost/be_myhotel/admin/hotel")
             .then((response) => {
               console.log(response.data.result)
-              this.setObjeks(response.data.result)})
+              this.setHotels(response.data.result)})
             .catch((error) => console.log(error));
           })
           .catch((error) => console.log(error));
