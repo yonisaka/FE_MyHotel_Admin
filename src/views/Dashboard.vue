@@ -6,7 +6,7 @@
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Total traffic"
                                 type="gradient-red"
-                                sub-title="350,897"
+                                sub-title="350,897" 
                                 icon="ni ni-active-40"
                                 class="mb-4 mb-xl-0"
                     >

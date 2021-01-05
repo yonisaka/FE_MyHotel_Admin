@@ -15,11 +15,11 @@
         />
 
         <sidebar-item :link="{name: 'Objek', icon: 'ni ni-bullet-list-67 text-red', path: '/objek'}"/>
-        <sidebar-item :link="{name: 'Insert', icon: 'ni ni-folder-17 text-red', path: '/insert'}"/>
+        <sidebar-item :link="{name: 'Hotel', icon: 'ni ni-building text-red', path: '/hotel'}"/>
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
-      <dashboard-navbar></dashboard-navbar>
+      <dashboard-navbar>s</dashboard-navbar>
 
       <div @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">

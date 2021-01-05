@@ -12,12 +12,12 @@
                     <div class="row align-items-center">
                       <div class="col">
                         <h3 class="mb-0 dark">
-                          List Objek
+                          List Hotel
                         </h3>
                       </div>
                       <div class="col text-right">
-                        <router-link to="/insert_objek">
-                          <base-button type="success" size="sm" ><b-icon-plus></b-icon-plus> Tambah Objek</base-button>
+                        <router-link to="/insert_hotel">
+                          <base-button type="success" size="sm" ><b-icon-plus></b-icon-plus> Tambah Hotel</base-button>
                         </router-link>
                       </div>
                     </div>
@@ -27,40 +27,34 @@
                         <thead clas="thead-light">
                           <tr>
                             <th class="text-center">#</th>
-                            <th class="text-center" colspan="2">Room</th>
-                            <th class="text-center">Jenis</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center"></th>
+                            <th class="text-center" colspan="">Hotel</th>
+                            <th class="text-center">Action</th>
                           </tr>
                         </thead>
                         <tbody class="list">
-                          <tr v-for="(row, index) in objeks" :key="row.objek_id">
-                            <th>{{index+1}}</th>
-                            <td>
+                          <tr v-for="(row, index) in hotels" :key="row.hotel_id">
+                            <th class="text-center">{{index+1}}</th>
+                            <!-- <td>
                               <img
-                                :src="row.objek_foto"
+                                :src="row.hotel_foto"
                                 class="img-fluid shadow mb-2"
                                 width="250"
                               /> <br>
+                            </td> -->
+                            <td><strong>{{ row.hotel_nama }}</strong>
+                                <br>
+                                {{ row.hotel_alamat }}
                             </td>
-                            <td><strong>{{ row.objek_nama }}</strong><br>
-                                {{ row.objek_keterangan }}
-                            </td>
-                            <td class="text-center">{{ row.objek_jenis }}</td>
-                            <td align="right">Rp. {{ formatPrice(row.objek_harga) }} </td>
-                            <td align="right">
-                              <strong>{{ row.objek_status }}</strong>
-                            </td>
+        
                             <td class="text-center">
                               <!-- <button class="btn btn-sm btn-primary"> 
-                                <b-icon-pencil @click="edit(row.objek_id)"></b-icon-pencil>
+                                <b-icon-pencil @click="edit(row.hotel_id)"></b-icon-pencil>
                               </button> -->
-                              <router-link class="btn btn-sm btn-primary" :to="'/edit_objek/'+row.objek_id">
+                              <router-link class="btn btn-sm btn-primary" :to="'/edit_hotel/'+row.hotel_id">
                                 <b-icon-pencil></b-icon-pencil>
                               </router-link>
                               <button class="btn btn-sm btn-danger"> 
-                                <b-icon-trash @click="hapus(row.objek_id)"></b-icon-trash>
+                                <b-icon-trash @click="hapus(row.hotel_id)"></b-icon-trash>
                               </button>
                             </td>
                           </tr>
@@ -78,27 +72,23 @@
   import axios from "axios";
 
   export default {
-    name: 'objek',
+    name: 'hotel',
     components: {
       
     },
     data() {
       return {
-        objeks: [],
-        objek: {},
+        hotels: [],
+        hotel: {},
       }
     },
     methods: { 
-      formatPrice(value) {
-        let val = (value/1).toFixed(2).replace('.', ',')
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-      },
-      setObjeks(data) {
-        this.objeks = data;
+      setHotels(data) {
+        this.hotels = data;
       },
       hapus(id) {
-        this.objek.objek_id = id;
-        console.log(this.objek);
+        this.hotel.hotel_id = id;
+        console.log(this.hotel);
         axios
           .post("http://localhost/be_myhotel/admin/objekDelete", this.objek)
           .then(() => {
@@ -122,10 +112,10 @@
     },
     mounted() {
       axios
-        .get("http://localhost/be_myhotel/api/objek")
+        .get("http://localhost/be_myhotel/admin/hotel")
         .then((response) => {
           console.log(response.data.result)
-          this.setObjeks(response.data.result)})
+          this.setHotels(response.data.result)})
         .catch((error) => console.log(error));
     },
   };

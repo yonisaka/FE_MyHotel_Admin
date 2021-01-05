@@ -25,15 +25,35 @@ export default new Router({
           component: () => import(/* webpackChunkName: "demo" */ './views/Objek.vue')
         },
         {
-          path: '/insert',
-          name: 'insert',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Insert.vue')
+          path: '/hotel',
+          name: 'hotel',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Hotel.vue')
         },
         {
           path: '/insert_objek',
-          name: 'insert_objek',
+          name: 'insert objek',
           component: () => import(/* webpackChunkName: "demo" */ './views/Insert_objek.vue')
-        }
+        },
+        {
+          path: '/insert_hotel',
+          name: 'insert hotel',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Insert_hotel.vue')
+        },
+        {
+          path: '/edit_hotel',
+          name: 'edit hotel',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Edit_hotel.vue')
+        },
+        {
+          path: '/edit_hotel/:id',
+          name: 'edit hotel',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Edit_hotel.vue')
+        },
+        {
+          path: '/edit_objek/:id',
+          name: 'edit objek',
+          component: () => import(/* webpackChunkName: "demo" */ './views/Edit_objek.vue')
+        },
       ]
     },
     {
