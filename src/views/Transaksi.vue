@@ -31,20 +31,31 @@
                         </thead>
                         <tbody class="list">
                           <tr v-for="(row, index) in transaksi" :key="row.transaksi_id">
-                            <th>{{index+1}}</th>
-                            <td>
+                            <th class="text-center">{{index+1}}</th>
+                            <td class="text-center">
                                 <strong>{{ row.transaksi_no }}</strong>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ row.transaksi_tanggal }}
                             </td>
-                            <td align="right">Rp. {{ formatPrice(row.transaksi_harga) }} </td>
-                            <td align="right">
-                              <strong>{{ row.transaksi_status }}</strong>
+                            <td class="text-center">Rp. {{ formatPrice(row.transaksi_harga) }} </td>
+                            <td class="text-center">
+                              <span v-if="row.transaksi_status === 'paid'" class="badge badge-success">
+                                  {{ row.transaksi_status|upper }}
+                              </span>
+                              <span v-else-if="row.transaksi_status === 'waiting'" class="badge badge-warning">                
+                                  {{ row.transaksi_status|upper }}
+                              </span>
+                              <span v-else class="badge badge-danger">
+                                  {{ row.transaksi_status|upper }}
+                              </span>
                             </td>
                             <td class="text-center">
-                              <button class="btn btn-sm btn-danger"> 
-                                <b-icon-trash @click="hapus(row.objek_id)"></b-icon-trash>
+                              <button class="btn btn-sm btn-success"> 
+                                <b-icon-check @click="paid(row.transaksi_id)"></b-icon-check>
+                              </button>
+                              <button class="btn btn-sm btn-warning"> 
+                                <b-icon-x @click="cancel(row.transaksi_id)"></b-icon-x>
                               </button>
                             </td>
                           </tr>
@@ -77,17 +88,58 @@
         let val = (value/1).toFixed(2).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       },
-      setObjeks(data) {
-        this.objeks = data;
+      setTransaksi(data) {
+        this.transaksi = data;
       },
-      
+      cancel(id) {
+      this.trans.transaksi_id = id;
+      this.trans.transaksi_status = 'canceled';
+      axios
+        .post("http://localhost/be_myhotel/api/transaksiUpdateSt", this.trans)
+        .then(() => {
+          this.$toast.error("Sukses Membatalkan Transaksi", {
+            type: "success",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+
+          // Update Data Transaksi
+          axios
+            .get("http://localhost/be_myhotel/api/transaksi")
+            .then((response) => this.setTransaksi(response.data.result))
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    },
+    paid(id) {
+      this.trans.transaksi_id = id;
+      this.trans.transaksi_status = 'paid';
+      axios
+        .post("http://localhost/be_myhotel/api/transaksiUpdateSt", this.trans)
+        .then(() => {
+          this.$toast.error("Sukses Melakukan Transaksi", {
+            type: "success",
+            position: "top-right",
+            duration: 3000,
+            dismissible: true,
+          });
+
+          // Update Data Transaksi
+          axios
+            .get("http://localhost/be_myhotel/api/transaksi")
+            .then((response) => this.setTransaksi(response.data.result))
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    },
     },
     mounted() {
       axios
-        .get("http://localhost/be_myhotel/api/objek")
+        .get("http://localhost/be_myhotel/api/transaksi")
         .then((response) => {
           console.log(response.data.result)
-          this.setObjeks(response.data.result)})
+          this.setTransaksi(response.data.result)})
         .catch((error) => console.log(error));
     },
   };
