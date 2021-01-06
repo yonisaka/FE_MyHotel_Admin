@@ -102,7 +102,6 @@
   //charts
   import * as chartConfigs from '@/components/Charts/config';
   import LineChart from '@/components/Charts/LineChart';
-  import BarChart from '@/components/Charts/BarChart';
   export default {
     components: {
       // ProjectsTable
@@ -114,6 +113,7 @@
         user: '',
         objek: '',
         hotel: '',
+        count:[],
         bigLineChart: {
         allData: [
           [0, 20, 10, 30, 15, 40, 20, 60, 60],
@@ -146,10 +146,10 @@
             datasets: [
               {
                 label: 'Performance',
-                data: this.bigLineChart.allData[index]
+                data: index
               }
             ],
-            labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep'],
           };
           this.bigLineChart.chartData = chartData;
           this.bigLineChart.activeIndex = index;
@@ -181,7 +181,16 @@
           this.setTotalHotel(response.data.result)})
         .catch((error) => console.log(error));
 
-        this.initBigChart(0);
+        axios
+        .get("http://localhost/be_myhotel/admin/chartday")
+        .then((response) => {
+                console.log(response.data)
+                this.initBigChart(response.data);
+                // this.setTotalHotel(response.data.result)
+                }
+              )
+        .catch((error) => console.log(error));
+
     }
   };
 </script>

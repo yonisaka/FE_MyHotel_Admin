@@ -23,7 +23,6 @@ import ArgonDashboard from './plugins/argon-dashboard'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-default.css';
-import VueSplide from '@splidejs/vue-splide';
 
 Vue.config.productionTip = false
 
@@ -33,7 +32,6 @@ Vue.use(BootstrapVueIcons)
 Vue.use(require('vue-cookie'));
 Vue.use(require('vue-moment'));
 Vue.use(VueToast);
-Vue.use( VueSplide );
 
 new Vue({
   router,
