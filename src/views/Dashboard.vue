@@ -56,11 +56,11 @@
                     <div slot="header" class="row align-items-center">
                         <div class="col">
                             <h6 class="text-light text-uppercase ls-1 mb-1">Overview</h6>
-                            <h5 class="h3 text-white mb-0">Sales value</h5>
+                            <h5 class="h3 text-white mb-0">Jumlah Transaksi / Daily</h5>
                         </div>
                         <div class="col">
                             <ul class="nav nav-pills justify-content-end">
-                                <li class="nav-item mr-2 mr-md-0">
+                                <!-- <li class="nav-item mr-2 mr-md-0">
                                     <a class="nav-link py-2 px-3"
                                       href="#"
                                       :class="{active: bigLineChart.activeIndex === 0}"
@@ -77,7 +77,7 @@
                                         <span class="d-none d-md-block">Week</span>
                                         <span class="d-md-none">W</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -115,17 +115,17 @@
         hotel: '',
         count:[],
         bigLineChart: {
-        allData: [
-          [0, 20, 10, 30, 15, 40, 20, 60, 60],
-          [0, 20, 5, 25, 10, 30, 15, 40, 40]
-        ],
-        activeIndex: 0,
-        chartData: {
-          datasets: [],
-          labels: [],
-        },
-        extraOptions: chartConfigs.blueChartOptions,
-      }
+          allData: [
+            [0, 20, 10, 30, 15, 40, 20, 60, 60],
+            [0, 20, 5, 25, 10, 30, 15, 40, 40]
+          ],
+          activeIndex: 0,
+          chartData: {
+            datasets: [],
+            labels: [],
+          },
+          extraOptions: chartConfigs.blueChartOptions,
+        }
       };
     },
     methods: {
@@ -141,18 +141,18 @@
         setTotalHotel(data) {
             this.hotel = data;
         },
-        initBigChart(index) {
+        initBigChart(label, result) {
           let chartData = {
             datasets: [
               {
-                label: 'Performance',
-                data: index
+                label: 'Jumlah Transaksi',
+                data: result
               }
             ],
-            labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            labels: label,
           };
           this.bigLineChart.chartData = chartData;
-          this.bigLineChart.activeIndex = index;
+          this.bigLineChart.activeIndex = result;
         }
     },
     mounted() {
@@ -162,18 +162,21 @@
           console.log(response.data.result)
           this.setTotalTransaksi(response.data.result)})
         .catch((error) => console.log(error));
+
         axios
         .get("http://localhost/be_myhotel/admin/totalUser")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalUser(response.data.result)})
         .catch((error) => console.log(error));
+
         axios
         .get("http://localhost/be_myhotel/admin/totalObjek")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalObjek(response.data.result)})
         .catch((error) => console.log(error));
+        
         axios
         .get("http://localhost/be_myhotel/admin/totalHotel")
         .then((response) => {
@@ -185,7 +188,7 @@
         .get("http://localhost/be_myhotel/admin/chartday")
         .then((response) => {
                 console.log(response.data)
-                this.initBigChart(response.data);
+                this.initBigChart(response.data.label, response.data.result);
                 // this.setTotalHotel(response.data.result)
                 }
               )
