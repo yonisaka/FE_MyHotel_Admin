@@ -145,7 +145,7 @@
           let chartData = {
             datasets: [
               {
-                label: 'Performance',
+                label: 'Sales',
                 data: index
               }
             ],
