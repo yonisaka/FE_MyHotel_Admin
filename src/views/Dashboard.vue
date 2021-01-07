@@ -145,8 +145,8 @@
           let chartData = {
             datasets: [
               {
-                label: 'Jumlah Transaksi',
-                data: result
+                label: 'Sales',
+                data: index
               }
             ],
             labels: label,
