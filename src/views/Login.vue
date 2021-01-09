@@ -103,6 +103,7 @@ export default {
     // },
     login() {
       if (this.auth.user_mail && this.auth.user_password) {
+        this.auth.user_role = 1;
         axios
           .post("http://localhost/be_myhotel/api/login", this.auth)
           .then((response) => {
@@ -129,7 +130,14 @@ export default {
             }
             
           })
-          .catch((err) => console.log(err));
+          .catch(() => {
+            this.$toast.error("Email dan Password tidak ditemukan", {
+              type: "error",
+              position: "top-right",
+              duration: 3000,
+              dismissible: true,
+            });
+          });
       } else {
         this.$toast.error("Email dan Password Harus diisi", {
           type: "error",
