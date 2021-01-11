@@ -110,7 +110,7 @@
       },
       searchTransaksi() {
         axios
-        .get("http://localhost/be_myhotel/api/transaksi?user_nama="+this.search)
+        .get("http://api.dagdigdug.my.id/api/transaksi?user_nama="+this.search)
         .then((response) => this.setTransaksi(response.data.result))
         .catch((error) => console.log(error));
       },
@@ -118,7 +118,7 @@
       this.trans.transaksi_id = id;
       this.trans.transaksi_status = 'canceled';
       axios
-        .post("http://localhost/be_myhotel/api/transaksiUpdateSt", this.trans)
+        .post("http://api.dagdigdug.my.id/api/transaksiUpdateSt", this.trans)
         .then(() => {
           this.$toast.error("Sukses Membatalkan Transaksi", {
             type: "success",
@@ -129,7 +129,7 @@
 
           // Update Data Transaksi
           axios
-            .get("http://localhost/be_myhotel/api/transaksi")
+            .get("http://api.dagdigdug.my.id/api/transaksi")
             .then((response) => this.setTransaksi(response.data.result))
             .catch((error) => console.log(error));
         })
@@ -139,7 +139,7 @@
       this.trans.transaksi_id = id;
       this.trans.transaksi_status = 'paid';
       axios
-        .post("http://localhost/be_myhotel/api/transaksiUpdateSt", this.trans)
+        .post("http://api.dagdigdug.my.id/api/transaksiUpdateSt", this.trans)
         .then(() => {
           this.$toast.error("Sukses Melakukan Transaksi", {
             type: "success",
@@ -150,7 +150,7 @@
 
           // Update Data Transaksi
           axios
-            .get("http://localhost/be_myhotel/api/transaksi")
+            .get("http://api.dagdigdug.my.id/api/transaksi")
             .then((response) => this.setTransaksi(response.data.result))
             .catch((error) => console.log(error));
         })
@@ -159,7 +159,7 @@
     },
     mounted() {
       axios
-        .get("http://localhost/be_myhotel/api/transaksi")
+        .get("http://api.dagdigdug.my.id/api/transaksi")
         .then((response) => {
           console.log(response.data.result)
           this.setTransaksi(response.data.result)})

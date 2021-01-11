@@ -114,7 +114,7 @@ import axios from "axios";
             formData.append('file', this.file);
             if (this.model.objek_keterangan && this.model.objek_nama && this.model.objek_harga ) {
                 axios
-                .post("http://localhost/be_myhotel/admin/editObjek", formData,
+                .post("http://api.dagdigdug.my.id/admin/editObjek", formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -143,7 +143,7 @@ import axios from "axios";
     },
     mounted() {
         axios
-        .get("http://localhost/be_myhotel/api/objek?objek_id=" + this.$route.params.id)
+        .get("http://api.dagdigdug.my.id/api/objek?objek_id=" + this.$route.params.id)
         .then((response) => {
             console.log(response.data.result);
             this.setObjeks(response.data.result)})

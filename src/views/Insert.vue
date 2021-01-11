@@ -171,7 +171,7 @@ import axios from "axios";
             console.log(this.model.file)
             if (this.model.hotel_id && this.model.objek_keterangan && this.model.objek_nama && this.model.objek_harga && this.model.file) {
                 axios
-                .post("http://localhost/be_myhotel/admin/addobjek", this.model)
+                .post("http://api.dagdigdug.my.id/admin/addobjek", this.model)
                 .then(() => {
                     // this.setUser(response.data)
                     this.$toast.success("Berhasil menambahkan Objek", {
@@ -197,7 +197,7 @@ import axios from "axios";
             console.log(this.model)
             if (this.model.hotel_nama && this.model.hotel_alamat) {
                 axios
-                .post("http://localhost/be_myhotel/admin/addhotel", this.model)
+                .post("http://api.dagdigdug.my.id/admin/addhotel", this.model)
                 .then(() => {
                     // this.setUser(response.data)
                     this.$toast.success("Berhasil menambahkan Objek", {
