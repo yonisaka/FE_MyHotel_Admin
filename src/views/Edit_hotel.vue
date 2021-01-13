@@ -93,7 +93,7 @@ import axios from "axios";
 
             if (this.hotel.hotel_nama && this.hotel.hotel_alamat) {
                 axios
-                .post("http://api.dagdigdug.my.id/admin/edithotel", formData,
+                .post("https://api.dagdigdug.my.id/admin/edithotel", formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -122,7 +122,7 @@ import axios from "axios";
     },
     mounted() {
         axios
-        .get("http://api.dagdigdug.my.id/admin/hotel?hotel_id=" + this.$route.params.id)
+        .get("https://api.dagdigdug.my.id/admin/hotel?hotel_id=" + this.$route.params.id)
         .then((response) => {
             console.log(response.data.result);
             this.setHotels(response.data.result)})

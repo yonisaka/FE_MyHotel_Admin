@@ -107,7 +107,7 @@
       },
       searchObjek() {
         axios
-        .get("http://api.dagdigdug.my.id/api/objek?objek_nama="+this.search)
+        .get("https://api.dagdigdug.my.id/api/objek?objek_nama="+this.search)
         .then((response) => this.setObjeks(response.data.result))
         .catch((error) => console.log(error));
       },
@@ -115,7 +115,7 @@
         this.objek.objek_id = id;
         console.log(this.objek);
         axios
-          .post("http://api.dagdigdug.my.id/admin/objekDelete", this.objek)
+          .post("https://api.dagdigdug.my.id/admin/objekDelete", this.objek)
           .then(() => {
             this.$toast.error("Sukses Hapus Objek", {
               type: "error",
@@ -126,7 +126,7 @@
 
             // Update Data objek
             axios
-            .get("http://api.dagdigdug.my.id/api/objek")
+            .get("https://api.dagdigdug.my.id/api/objek")
             .then((response) => {
               console.log(response.data.result)
               this.setObjeks(response.data.result)})
@@ -137,7 +137,7 @@
     },
     mounted() {
       axios
-        .get("http://api.dagdigdug.my.id/api/objek")
+        .get("https://api.dagdigdug.my.id/api/objek")
         .then((response) => {
           console.log(response.data.result)
           this.setObjeks(response.data.result)})

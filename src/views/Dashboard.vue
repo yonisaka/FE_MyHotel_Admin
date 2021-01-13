@@ -157,35 +157,35 @@
     },
     mounted() {
         axios
-        .get("http://api.dagdigdug.my.id/admin/totalTransaksi")
+        .get("https://api.dagdigdug.my.id/admin/totalTransaksi")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalTransaksi(response.data.result)})
         .catch((error) => console.log(error));
 
         axios
-        .get("http://api.dagdigdug.my.id/admin/totalUser")
+        .get("https://api.dagdigdug.my.id/admin/totalUser")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalUser(response.data.result)})
         .catch((error) => console.log(error));
 
         axios
-        .get("http://api.dagdigdug.my.id/admin/totalObjek")
+        .get("https://api.dagdigdug.my.id/admin/totalObjek")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalObjek(response.data.result)})
         .catch((error) => console.log(error));
         
         axios
-        .get("http://api.dagdigdug.my.id/admin/totalHotel")
+        .get("https://api.dagdigdug.my.id/admin/totalHotel")
         .then((response) => {
           console.log(response.data.result)
           this.setTotalHotel(response.data.result)})
         .catch((error) => console.log(error));
 
         axios
-        .get("http://api.dagdigdug.my.id/admin/chartday")
+        .get("https://api.dagdigdug.my.id/admin/chartday")
         .then((response) => {
                 console.log(response.data)
                 this.initBigChart(response.data.label, response.data.result);

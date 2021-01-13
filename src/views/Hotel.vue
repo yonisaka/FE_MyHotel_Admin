@@ -90,7 +90,7 @@
         this.hotel.hotel_id = id;
         console.log(this.hotel);
         axios
-          .post("http://api.dagdigdug.my.id/admin/hotelDelete", this.hotel)
+          .post("https://api.dagdigdug.my.id/admin/hotelDelete", this.hotel)
           .then(() => {
             this.$toast.error("Sukses Hapus Hotel", {
               type: "error",
@@ -101,7 +101,7 @@
 
             // Update Data objek
             axios
-            .get("http://api.dagdigdug.my.id/admin/hotel")
+            .get("https://api.dagdigdug.my.id/admin/hotel")
             .then((response) => {
               console.log(response.data.result)
               this.setHotels(response.data.result)})
@@ -112,7 +112,7 @@
     },
     mounted() {
       axios
-        .get("http://api.dagdigdug.my.id/admin/hotel")
+        .get("https://api.dagdigdug.my.id/admin/hotel")
         .then((response) => {
           console.log(response.data.result)
           this.setHotels(response.data.result)})
