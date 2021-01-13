@@ -62,12 +62,22 @@
                                                                 v-model="model.objek_harga"
                                                                 >
                                                     </base-input>
-                                                    <base-input class="input-group-alternative"
+                                                    <!-- <base-input class="input-group-alternative"
                                                                 placeholder="Jenis"
                                                                 addon-left-icon="ni ni-tag"
                                                                 v-model="model.objek_jenis"
                                                                 >
-                                                    </base-input>
+                                                    </base-input> -->
+                                                    <div class="ml-2 my-3">
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" class="form-check-input" id="hotel" value="hotel" v-model="model.objek_jenis">
+                                                        <label class="form-check-label" for="hotel">Hotel</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input type="radio" class="form-check-input" id="auditorium" value="auditorium" v-model="model.objek_jenis">
+                                                        <label class="form-check-label" for="auditorium">Auditorium</label>
+                                                    </div>
+                                                    </div>
                                                     <base-input class="input-group-alternative"
                                                                 addon-left-icon="ni ni-camera-compact"
                                                                 >

@@ -94,7 +94,6 @@ export default {
   created(){
       if (this.$cookie.get('user_id')){
           this.$router.push({ path: this.$route.name});
-          console.log(this.$route.name);
         }
     },
   methods: {
@@ -104,6 +103,7 @@ export default {
     login() {
       if (this.auth.user_mail && this.auth.user_password) {
         this.auth.user_role = 1;
+        console.log(this.auth)
         axios
           .post("https://api.dagdigdug.my.id/api/login", this.auth)
           .then((response) => {

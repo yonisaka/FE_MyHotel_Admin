@@ -34,22 +34,23 @@
                       <table class="table align-items-center table-flush">
                         <thead clas="thead-light">
                           <tr>
-                            <th class="text-center">#</th>
-                            <th class="text-center" colspan="2">Room</th>
-                            <th class="text-center">Jenis</th>
-                            <th class="text-center">Harga</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center"></th>
+                            <th class="text-center" >#</th>
+                            <th class="text-center" >Room</th>
+                            <th class="text-center" >Deskripsi</th>
+                            <th class="text-center" >Jenis</th>
+                            <th class="text-center" >Harga</th>
+                            <th class="text-center" >Status</th>
+                            <th class="text-center" ></th>
                           </tr>
                         </thead>
                         <tbody class="list">
                           <tr v-for="(row, index) in objeks" :key="row.objek_id">
                             <th>{{index+1}}</th>
-                            <td>
+                            <td scope="col">
                               <img
                                 :src="row.objek_foto"
                                 class="img-fluid shadow mb-2"
-                                width="250"
+                                width="250px"
                               /> <br>
                             </td>
                             <td><strong>{{ row.objek_nama }}</strong><br>
