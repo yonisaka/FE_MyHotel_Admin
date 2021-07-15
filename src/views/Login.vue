@@ -105,7 +105,7 @@ export default {
         this.auth.user_role = 1;
         console.log(this.auth)
         axios
-          .post("https://api.dagdigdug.my.id/api/login", this.auth)
+          .post("http://localhost/BE_Myhotel/index.php/api/login", this.auth)
           .then((response) => {
             if (response.data != null){
               console.log(response.data.data);

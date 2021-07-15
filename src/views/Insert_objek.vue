@@ -139,7 +139,7 @@ import axios from "axios";
 
             if (this.model.hotel_id && this.model.objek_keterangan && this.model.objek_nama && this.model.objek_harga ) {
                 axios
-                .post("https://api.dagdigdug.my.id/admin/addObjek", formData,
+                .post("http://localhost/BE_Myhotel/index.php/admin/addObjek", formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -168,7 +168,7 @@ import axios from "axios";
     },
     mounted() {
         axios
-        .get("https://api.dagdigdug.my.id/admin/hotel")
+        .get("http://localhost/BE_Myhotel/index.php/admin/hotel")
         .then((response) => {
         console.log(response.data.result)
         this.setHotels(response.data.result)})

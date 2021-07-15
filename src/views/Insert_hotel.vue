@@ -92,7 +92,7 @@ import axios from "axios";
 
             if (this.model.hotel_nama && this.model.hotel_alamat) {
                 axios
-                .post("https://api.dagdigdug.my.id/admin/addHotel", formData,
+                .post("http://localhost/BE_Myhotel/index.php/admin/addHotel", formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
